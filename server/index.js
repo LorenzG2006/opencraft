@@ -56,6 +56,8 @@ async function cacheNewWord(firstWord, secondWord, result, emoji) {
 async function craftNewWord(firstWord, secondWord) {
     const cachedResult = await craftNewWordFromCache(firstWord, secondWord);
     if (cachedResult) {
+        cachedResult.first = false;
+
         return cachedResult;
     }
 
@@ -126,7 +128,7 @@ async function generateWord(firstWord, secondWord, session, grammar, context) {
     ) {
         return {result: '', emoji: ''}
     }
-    return {result: capitalizeFirstLetter(JSON.parse(result).answer), emoji: JSON.parse(emojiResult).answer}
+    return {result: capitalizeFirstLetter(JSON.parse(result).answer), emoji: JSON.parse(emojiResult).answer, first: true}
 }
 
 function capitalizeFirstLetter(string) {
@@ -181,7 +183,8 @@ fastify.route({
                 type: 'object',
                 properties: {
                     result: {type: 'string'},
-                    emoji: {type: 'string'}
+                    emoji: {type: 'string'},
+                    first: {type: 'boolean'}
                 }
             }
         }
