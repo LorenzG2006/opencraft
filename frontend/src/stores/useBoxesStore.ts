@@ -7,6 +7,7 @@ export interface BoxStoreEntry {
     left: number
     title: string
     emoji: string
+    first: boolean
     loading?: boolean
 }
 
@@ -14,7 +15,7 @@ export const useBoxesStore = defineStore('counter', () => {
   const boxes = reactive<{
     [key: string]: BoxStoreEntry
   }>({
-    a: {top: 20, left: 80, title: 'Fire', emoji: '🔥'},
+    a: {top: 20, left: 80, title: 'Fire', emoji: '🔥', first: false},
   })
 
   function addBox(box: BoxStoreEntry) {

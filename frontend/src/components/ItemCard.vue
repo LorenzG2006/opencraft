@@ -38,11 +38,14 @@ const [, drop] = useDrop(() => ({
       const resultAnswer = response.data.result !== '' ? response.data.result : store.boxes[props.id].title
       const resultEmoji = response.data.emoji !== '' ? response.data.emoji : store.boxes[props.id].emoji
 
+      const firstDiscovery = response.data.first;
+
       addBox({
         title: resultAnswer,
         emoji: resultEmoji,
         left: store.boxes[props.id].left,
-        top: store.boxes[props.id].top
+        top: store.boxes[props.id].top,
+        first: firstDiscovery
       })
       if(!resources.value.find((resource: { title: string; }) => resource.title === resultAnswer)){
         addResource({
